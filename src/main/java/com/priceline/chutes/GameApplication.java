@@ -8,18 +8,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Game implements ApplicationRunner{
-
-	//NOTE: To achieve maintainability and extensibility for a later extension of the whole application, the specific 'chutes-and-ladders' related functionalities
-	//have been moved to the new class named 'Controller.java'.
+public class GameApplication{ //NOTE: This is another addition to make the entire app as a Spring-Boot supported to increase maintainability & extensibility.
 
 	//NOTE: You can run a game in 2 different ways.
 	// 1. By sending a request to the RESTful service endpoint after the Spring Boot server is up and running.
-	// 2. By checking the result produced by the play that is automatically run at the time of launching the app or running the gradle build run with the below command.
-	// 		gradle run --args="one two three four"
+	// 2. By running a gradle build (gradle run --args="one two three four") in the command line, where the args are the names of the players.
 
 	public static void main(String[] args) {
-		SpringApplication.run(Game.class, args);
+		SpringApplication.run(GameApplication.class, args);
 	}
 
 	public void run(ApplicationArguments args) throws Exception {
