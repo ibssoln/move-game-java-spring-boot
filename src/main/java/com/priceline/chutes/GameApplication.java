@@ -19,14 +19,4 @@ public class GameApplication{ //NOTE: This is another addition to make the entir
 		SpringApplication.run(GameApplication.class, args);
 	}
 
-	public void run(ApplicationArguments args) throws Exception {
-		Controller game;
-		try {
-			game = new ConventionalGameController();
-			game.initiateGame(args.getSourceArgs());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }
