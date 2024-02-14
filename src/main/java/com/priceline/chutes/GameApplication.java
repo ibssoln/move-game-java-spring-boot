@@ -1,8 +1,5 @@
 package com.priceline.chutes;
 
-import com.priceline.chutes.conventionalgame.ConventionalGameController;
-import com.priceline.chutes.framework.Controller;
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

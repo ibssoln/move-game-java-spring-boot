@@ -22,4 +22,10 @@ Author: Chloe Bae
 18. Created a game controller class (Controller.java) to which all the game execution functions are moved from the Game class. This class was created to better encapsulate the game execution functions that are only related to the 'chutes-and-ladders' game, in order to achieve a maintainability and extensibility for a later extension of the whole application.
 19. Created a util package and Utility class to store a static non-state functions to be used as helper methods.
 20. For extensibility, created a game controller interface to be implemented by a variation of the concrete game classes.
-21.
+21. Integrated Maven Spring Boot framework with the existing gradle based application. Therefore, now you can run the game in ether way - using Spring Boot Restful service, or using the gradle build run.
+	//************************************************
+	//NOTE: You can run a game in 2 different ways.
+	// 1. By sending a request to the RESTful service endpoint after the Spring Boot server is up and running.
+	// 2. By running a gradle build (gradle run --args="one two three four") in the command line, where the args (one two three four) are the names of the players.
+	//************************************************
+22.
