@@ -1,6 +1,12 @@
 package com.priceline.chutes.conventionalgame;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class BoardSquare {
+
+    //NOTE: added a SLF4J logger to log info and errors via the logging facility.
+    private static final Logger LOG = LoggerFactory.getLogger(BoardSquare.class);
 
     //NOTE: Created an 'entity' package to better organize the classes.
     // The package 'entity' archives all supporting entity classes, while the main class 'Game' remains at the root directory.

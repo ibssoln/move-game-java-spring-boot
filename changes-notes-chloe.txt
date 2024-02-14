@@ -28,4 +28,5 @@ Author: Chloe Bae
 	// 1. By sending a request to the RESTful service endpoint after the Spring Boot server is up and running.
 	// 2. By running a gradle build (gradle run --args="one two three four") in the command line, where the args (one two three four) are the names of the players.
 	//************************************************
-22.
+22. Added a SLF4J logging to the classes, and set the logging levels in the application.properties file.
+23.

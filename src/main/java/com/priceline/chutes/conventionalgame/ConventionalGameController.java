@@ -1,12 +1,19 @@
 package com.priceline.chutes.conventionalgame;
 
+import com.priceline.chutes.Game;
 import com.priceline.chutes.framework.Controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import static com.priceline.chutes.constant.GameConstants.RANDOM;
 import static com.priceline.chutes.util.Utility.print;
 
 public class ConventionalGameController implements Controller {
+
+    //NOTE: added a SLF4J logger to log info and errors via the logging facility.
+    private static final Logger LOG = LoggerFactory.getLogger(ConventionalGameController.class);
 
     //NOTE: this class stores all game control related functionalities. This class was created to better encapsulate the game execution functions
     // that are only related to the 'chutes-and-ladders' game, in order to achieve a maintainability and extensibility for a later extension of the whole application.

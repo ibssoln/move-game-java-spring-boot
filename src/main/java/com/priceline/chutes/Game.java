@@ -2,8 +2,13 @@ package com.priceline.chutes;
 
 import com.priceline.chutes.conventionalgame.ConventionalGameController;
 import com.priceline.chutes.framework.Controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Game {
+
+    //NOTE: added a SLF4J logger to log info and errors via the logging facility.
+    private static final Logger LOG = LoggerFactory.getLogger(Game.class);
 
     //************************************************
     //NOTE: You can run a game in 2 different ways.
@@ -19,8 +24,9 @@ public class Game {
         try {
             game = new ConventionalGameController();
             game.initiateGame(args);
-
         } catch (Exception e) {
+            //NOTE: added a SLF4J logger to log info and errors via the logging facility.
+            LOG.error("An Exception has occurred: {}, {}", e.getCause(), e.getMessage());
             e.printStackTrace();
         }
     }
