@@ -1,4 +1,4 @@
-package com.priceline.chutes.entity.conventionalgame;
+package com.priceline.chutes.entity.chutesladder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

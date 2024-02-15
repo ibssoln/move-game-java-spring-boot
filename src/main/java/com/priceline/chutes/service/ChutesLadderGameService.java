@@ -1,8 +1,8 @@
 package com.priceline.chutes.service;
 
-import com.priceline.chutes.entity.conventionalgame.Board;
-import com.priceline.chutes.entity.conventionalgame.BoardSquare;
-import com.priceline.chutes.entity.conventionalgame.Player;
+import com.priceline.chutes.entity.chutesladder.Board;
+import com.priceline.chutes.entity.chutesladder.BoardSquare;
+import com.priceline.chutes.entity.chutesladder.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,35 +14,40 @@ import static com.priceline.chutes.constant.GameConstants.RANDOM;
 import static com.priceline.chutes.util.Utility.*;
 
 @Service
-public class ConventionalGameService implements GameService {
+public class ChutesLadderGameService implements GameService {
 
     //NOTE: added a SLF4J logger to log info and errors via the logging facility.
-    private static final Logger LOG = LoggerFactory.getLogger(ConventionalGameService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ChutesLadderGameService.class);
 
     //NOTE: this class stores all game control related functionalities. This class was created to better encapsulate the game execution functions
     // that are only related to the 'chutes-and-ladders' game, in order to achieve a maintainability and extensibility for a later extension of the whole application.
 
-    public ConventionalGameService() {
+    public ChutesLadderGameService() {
         super();
     }
 
-    public void initiateGame(String[] gameParams){
-        //NOTE: Below is a new section of code for processing the main method's parameters (args),
-        // to accept a variable number (2 ~4) of players with their names. Based on the players' information, the players instances are created.
-        logInfo("1. Let's set the players!");
-        List<Player> players = createBasePlayers(gameParams);
+    public String initiateGame(String[] gameParams) throws Exception {
+        Player winner = null;
+        try {
+            //NOTE: Below is a new section of code for processing the main method's parameters (args),
+            // to accept a variable number (2 ~4) of players with their names. Based on the players' information, the players instances are created.
+            logInfo("1. Let's set the players!");
+            List<Player> players = createBasePlayers(gameParams);
 
-        if(!CollectionUtils.isEmpty(players)){
-            //NOTE: Below is a new section of code for determining the play order of the players.
-            logInfo("2. Let's determine the play order!");
-            players = determinePlayOrder(players);
-            logInfo("The play order : "+ players.stream().map(player -> player.getName()).collect(Collectors.joining(", ")).toString());
+            if (!CollectionUtils.isEmpty(players)) {
+                //NOTE: Below is a new section of code for determining the play order of the players.
+                logInfo("2. Let's determine the play order!");
+                players = determinePlayOrder(players);
+                logInfo("The play order : " + players.stream().map(player -> player.getName()).collect(Collectors.joining(", ")).toString());
 
-            logInfo("3. Let's play the game!");
-            Player winner = playGame(players);
-            logInfo("The winner is: " + winner.getName());
+                logInfo("3. Let's play the game!");
+                winner = playGame(players);
+                logInfo("The winner is: " + winner.getName());
+            }
+        }catch(Exception e){
+            throw new Exception(e);
         }
-
+        return (Objects.nonNull(winner))? winner.getName() : "UNKNOWN";
     }
 
     //NOTE: the algorithm of this spin method's result is closely pertaining to the 'chutes-and-ladders' game. Therefore, moved it to this game controller class,

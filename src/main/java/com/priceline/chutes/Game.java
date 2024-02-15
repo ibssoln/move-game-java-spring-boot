@@ -1,6 +1,6 @@
 package com.priceline.chutes;
 
-import com.priceline.chutes.service.ConventionalGameService;
+import com.priceline.chutes.service.ChutesLadderGameService;
 import com.priceline.chutes.service.GameService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public class Game {
     public static void main(String[] args) {
         GameService game;
         try {
-            game = new ConventionalGameService();
+            game = new ChutesLadderGameService();
             game.initiateGame(args);
         } catch (Exception e) {
             //NOTE: added a SLF4J logger to log info and errors via the logging facility.
