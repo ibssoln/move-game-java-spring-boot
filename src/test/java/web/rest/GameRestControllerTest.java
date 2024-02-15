@@ -1,122 +1,85 @@
-//package web.rest;
-//
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-//import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-//import static org.mockito.Mockito.when;
-//
-//import com.priceline.chutes.GameApplication;
-//import com.priceline.chutes.web.rest.GameRestController;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-//import org.springframework.boot.test.context.TestConfiguration;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.test.context.ContextConfiguration;
-//import org.springframework.test.context.TestPropertySource;
-//import org.springframework.test.context.junit4.SpringRunner;
-//import org.springframework.test.web.servlet.MockMvc;
-//import org.springframework.boot.test.mock.mockito.MockBean;
-//
-////import com.fasterxml.jackson.databind.ObjectMapper;
-////import com.priceline.chutes.GameApplication;
-////import com.priceline.chutes.dto.chutesladder.ChutesLadderRequest;
-////import com.priceline.chutes.service.ChutesLadderGameService;
-////import com.priceline.chutes.web.rest.GameRestController;
-////import org.junit.Test;
-////import org.junit.runner.RunWith;
-////import org.springframework.beans.factory.annotation.Autowired;
-////import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-////import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-////import org.springframework.boot.test.mock.mockito.MockBean;
-////import org.springframework.http.MediaType;
-////import org.springframework.test.context.ContextConfiguration;
-////import org.springframework.test.context.TestPropertySource;
-////import org.springframework.test.context.junit4.SpringRunner;
-////import org.springframework.test.web.servlet.MockMvc;
-////import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-////import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-////
-////import static org.hamcrest.Matchers.hasSize;
-////import static org.mockito.BDDMockito.given;
-////import static org.mockito.Mockito.when;
-////import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
-////import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-////import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-//
-////@ContextConfiguration(classes = GameRestController.class)
-////@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-////@SpringBootTest(classes = GameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-////@ContextConfiguration(classes = {GameApplication.class})
-//
-////@RunWith(SpringRunner.class)
-////@ContextConfiguration(classes={GameApplication.class, ChutesLadderGameService.class, GameRestController.class})
-////@WebMvcTest(GameRestController.class)
-////@TestPropertySource(properties = {"logging.level.root=info"})
-//
-//
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.priceline.chutes.service.ChutesLadderGameService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.mock.mockito.MockBean;
-//import org.springframework.test.web.servlet.MockMvc;
-//import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-//
-//@RunWith(SpringRunner.class)
-//@ContextConfiguration(classes= GameApplication.class)
-//@WebMvcTest(GameRestController.class)
-//public class GameRestControllerTest {
-//
-//    @Autowired
-//    private MockMvc mvc;
-//
-//    @MockBean
-//    private ChutesLadderGameService service;
-//
-//    @TestConfiguration
-//    static class ChutesLadderGameServiceTestContextConfiguration {
-//        @Bean
-//        public ChutesLadderGameService service() {
-//            return new ChutesLadderGameService() {
-//            };
-//        }
-//    }
-//
-//    @Test
-//    public void shouldReturn401() throws Exception {
-//        when(service.initiateGame(new String[]{"Alex", "Mike"})).thenReturn("Alex");
-//        mvc.perform(MockMvcRequestBuilders.post("/game/chutesladder")).andExpect(status().isOk());
-//    }
-//
-////    @Test
-////    public void givenEmployees_whenGetEmployees_thenReturnJsonArray()
-////            throws Exception {
-//
-//////        given(service.initiateGame(new String[]{"Alex", "Mike"})).willReturn("Alex");
-////        ChutesLadderRequest payload = ChutesLadderRequest.builder().playerNames(new String[]{"Alex", "Mike"}).build();
-////        mvc.perform(MockMvcRequestBuilders
-////                        .post("/game/chutesladder")
-////                        .content(asJsonString(payload))
-////                        .contentType(MediaType.APPLICATION_JSON)
-////                        .accept(MediaType.APPLICATION_JSON))
-////                .andExpect(status().isOk())
-////                .andExpect(MockMvcResultMatchers.jsonPath("$.winner").exists());
-////
-////        mvc.perform(post("/api/employees")
-////                        .contentType(MediaType.APPLICATION_JSON))
-////                .andExpect(status().isOk());
-//////                .andExpect(jsonPath("$", hasSize(1)));
-//////                .andExpect(jsonPath("$[0].name", is(alex.getName())));
-////    }
-//
-//    public static String asJsonString(final Object obj) {
-//        try {
-//            return new ObjectMapper().writeValueAsString(obj);
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//
-//}
+package web.rest;
+
+import com.priceline.chutes.dto.chutesladder.ChutesLadderRequest;
+import com.priceline.chutes.dto.chutesladder.ChutesLadderResponse;
+import com.priceline.chutes.web.rest.GameRestController;
+import org.easymock.EasyMock;
+import org.easymock.EasyMockRunner;
+import org.easymock.Mock;
+import org.easymock.TestSubject;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import com.priceline.chutes.service.ChutesLadderGameService;
+import java.util.Arrays;
+
+import static org.junit.Assert.*;
+
+@RunWith(EasyMockRunner.class)
+public class GameRestControllerTest {
+
+    private String[] playerNames;
+
+    @Before
+    public void setupTestVars(){
+        playerNames = new String[]{"Jane", "Mike", "Sue", "Ben", "Carlos"};
+    }
+
+    @TestSubject
+    GameRestController controller = new GameRestController();
+
+    @Mock
+    private ChutesLadderGameService service;
+
+    @Test
+    public void given4PlayerNames_whenPlayAndGetWinner_thenReturnWinnerName() throws Exception {
+        String winnerName = "Mike";
+        String[] fourPlayers = Arrays.copyOfRange(playerNames, 0, 4);
+        ChutesLadderRequest request = ChutesLadderRequest.builder().playerNames(fourPlayers).build();
+        EasyMock.expect(service.initiateGame(fourPlayers)).andReturn(winnerName);
+        EasyMock.replay(service);
+        ResponseEntity<ChutesLadderResponse> response = controller.playAndGetWinner(request);
+        assertNotNull(response);
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode());
+        assertEquals(winnerName, response.getBody().getWinner());
+    }
+
+    @Test
+    public void givenOnlyOnePlayer_whenPlayAndGetWinner_thenReturnErrorMessageNullWinner() throws Exception {
+        String[] onePlayer = Arrays.copyOfRange(playerNames, 0, 1);
+        ChutesLadderRequest request = ChutesLadderRequest.builder().playerNames(onePlayer).build();
+        ResponseEntity<ChutesLadderResponse> response = controller.playAndGetWinner(request);
+        assertNotNull(response);
+        assertEquals(HttpStatusCode.valueOf(400), response.getStatusCode());
+        assertNull(response.getBody().getWinner());
+        assertEquals("Please provide at least 2 players names.", response.getBody().getError());
+    }
+
+    @Test
+    public void givenFivePlayerNames_whenPlayAndGetWinner_thenReturnErrorMessageNullWinner() throws Exception {
+        String[] fivePlayers = Arrays.copyOfRange(playerNames, 0, 5);
+        ChutesLadderRequest request = ChutesLadderRequest.builder().playerNames(fivePlayers).build();
+        ResponseEntity<ChutesLadderResponse> response = controller.playAndGetWinner(request);
+        assertNotNull(response);
+        assertEquals(HttpStatusCode.valueOf(400), response.getStatusCode());
+        assertNull(response.getBody().getWinner());
+        assertEquals("This game supports up to 4 players.", response.getBody().getError());
+    }
+
+    @Test
+    public void given4PlayerNames_whenPlayAndGetWinnerThrowsException_thenReturnErrorMessageNullWinner() throws Exception {
+        String winnerName = "Mike";
+        String[] fourPlayers = Arrays.copyOfRange(playerNames, 0, 4);
+        ChutesLadderRequest request = ChutesLadderRequest.builder().playerNames(fourPlayers).build();
+        EasyMock.expect(service.initiateGame(fourPlayers)).andThrow(new RuntimeException());
+        EasyMock.replay(service);
+        ResponseEntity<ChutesLadderResponse> response = controller.playAndGetWinner(request);
+        assertNotNull(response);
+        assertEquals(HttpStatusCode.valueOf(500), response.getStatusCode());
+        assertNull(response.getBody().getWinner());
+        assertEquals("An unexpected error occurred. Please try again.", response.getBody().getError());
+    }
+
+}

@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static org.junit.Assert.*;
-//import com.priceline.chutes.service.SpinRollService;
-//import org.easymock.Mock;
 
 @RunWith(EasyMockRunner.class)
 public class ChutesLadderGameServiceTest {
@@ -23,8 +21,8 @@ public class ChutesLadderGameServiceTest {
     //TODO:
     // Once the 'spin()' function is externalized as commented in the section in the ChutesLadderGameService, then we can actually interject and use a "Mock" data
     // to have a specific spin results and evaluate the results of the spin function, via the unit tests being performed in this test class, as below.
-//    @Mock
-//    SpinRollService spinRollService;
+    // @Mock
+    // SpinRollService spinRollService;
 
     private String[] playerNames;
     private List<Player> players;
@@ -34,7 +32,6 @@ public class ChutesLadderGameServiceTest {
         playerNames = new String[]{"Jane", "Mike", "Sue", "Ben", "Carlos"};
         players = new ArrayList(List.of(new Player("Jane"), new Player("Mike"), new Player("Sue")));
     }
-
 
     @Test
     public void given4PlayerNames_whenInitiateGame_thenReturnDetermineOrderPlayGameReturnWinner() throws Exception {
