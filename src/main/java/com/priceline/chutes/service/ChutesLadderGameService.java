@@ -36,9 +36,9 @@ public class ChutesLadderGameService implements GameService {
 
             if (!CollectionUtils.isEmpty(players)) {
                 //NOTE: Below is a new section of code for determining the play order of the players.
-                logInfo("2. Let's determine the play order!");
+                logInfo("2. Let's determine the order of players to spin!");
                 players = determinePlayOrder(players);
-                logInfo("The play order : " + players.stream().map(player -> player.getName()).collect(Collectors.joining(", ")).toString());
+                logInfo(">> The determined order of play to spin: " + players.stream().map(player -> player.getName()).collect(Collectors.joining(", ")).toString());
 
                 logInfo("3. Let's play the game!");
                 winner = playGame(players);
@@ -76,7 +76,7 @@ public class ChutesLadderGameService implements GameService {
         //1. each player spins and get their individual number.
         players.stream().forEach(player -> {
             int spinVal = spin();
-            logInfo("> player name: "+player.getName()+", spin result: "+spinVal);
+            logInfo("> Name: "+player.getName()+" - Spin Result: "+spinVal);
             if(Objects.nonNull(spinResults.get(spinVal))){
                 spinResults.get(spinVal).add(player);
             }else{
