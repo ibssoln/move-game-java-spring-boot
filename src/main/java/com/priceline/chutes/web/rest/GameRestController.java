@@ -30,13 +30,10 @@ public class GameRestController {
         String winnerName = "";
         try {
             if (Objects.isNull(chutesLadderRequest.getPlayerNames())) {
-                logInfo("case 1");
                 return new ResponseEntity<>(ChutesLadderResponse.builder().error("Please provide the names of the players").build(), HttpStatus.BAD_REQUEST);
             } else if (chutesLadderRequest.getPlayerNames().length < 2) {
-                logInfo("case 2");
                 return new ResponseEntity<>(ChutesLadderResponse.builder().error("Please provide at least 2 players names.").build(), HttpStatus.BAD_REQUEST);
             } else if (chutesLadderRequest.getPlayerNames().length > 4) {
-                logInfo("case 3");
                 return new ResponseEntity<>(ChutesLadderResponse.builder().error("This game supports up to 4 players.").build(), HttpStatus.BAD_REQUEST);
             }
             winnerName = chutesLadderGameService.initiateGame(chutesLadderRequest.getPlayerNames());
