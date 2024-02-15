@@ -25,6 +25,9 @@ public class GameRestController {
     @Autowired
     private ChutesLadderGameService chutesLadderGameService;
 
+    // NOTE: This REST web service takes a list of player names (String[]) in a json request body, and play the chutes and ladder game, and
+    // returns the result of the game (winner's name). If there is an error, instead of returning the result of the game, this operation returns a
+    // proper error message to meet the user's need, with a null value in the winner's name in the resulting json.
     @RequestMapping(value = "/chutesladder", method = RequestMethod.POST, produces = {"application/json"}, consumes = {"application/json"})
     public ResponseEntity<ChutesLadderResponse> playAndGetWinner(@RequestBody ChutesLadderRequest chutesLadderRequest) throws Exception {
         String winnerName = "";

@@ -33,3 +33,5 @@ Author: Chloe Bae
 24. Added a package named 'rest', under the package named 'web', and added a Spring Web REST controller class 'GameRestController' under it. Added code in the GameRestController class, to handle the restful web service calls to play a gama and return the game's results to the requesting application.
 25. Added a dto and chutesladder package. Created ChutesLadderRequest and ChutesLadderResponse classes to be used by the RESTful service call that runs a chutes and ladders game.
 26. Added a GameType enum to enable the expansion of additional games in the future. Both (1) the Game.java class (gradle run class) and (2) the Restful Spring web service support the extensibility.
+27. Created new packages and classes to be used for another variation of games (e.g., snakeLadder).
+28.

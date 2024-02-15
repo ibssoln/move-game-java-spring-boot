@@ -35,8 +35,9 @@ public class Game {
             if (C_LAD.getName().equalsIgnoreCase(args[0])) {
                 game = new ChutesLadderGameService();
                 game.initiateGame(Arrays.copyOfRange(args, 1, args.length));
+            }else{
+                // else... // NOTE: you can expand this with other games, using the GameType enum values.
             }
-            // else... // NOTE: you can expand with more games in here, using the GameType enum values.
         } catch (Exception e) {
             //NOTE: added a SLF4J logger to log info and errors via the logging facility.
             LOG.error("An Exception has occurred: {}, {}", e.getCause(), e.getStackTrace());

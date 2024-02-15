@@ -10,7 +10,7 @@ public class Utility {
     //NOTE: added a SLF4J logger to log info and errors via the logging facility.
     private static final Logger LOG = LoggerFactory.getLogger(Utility.class);
 
-    //NOTE: the 'private' modifier
+    //NOTE: the 'private' modifier hides the constructor from other external users, and makes this object a singleton.
     private Utility() { //NOTE: explicitly set this no-arg constructor to be 'private', to prevent an external user from instantiating an object of this class.
         super();
     }
