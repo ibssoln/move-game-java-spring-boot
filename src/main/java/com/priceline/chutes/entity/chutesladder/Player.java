@@ -35,11 +35,9 @@ public class Player {
         return name;
     }
 
-    //NOTE: We either not have this 'setName' method or set the modifier of this 'setName' method as 'private',
-    //to clearly express the business rule that we do not want a Player's name to be changed by an external access/influence.
-    private void setName(String name) { // NOTE: By setting this setter as 'private', we made it clear to block the case where a player name is changed by an external influence.
-        this.name = name;
-    }
+    //NOTE: about 'setName()'
+    // To maintain the contract (where a name must be provided when a Player object is instantiated and should not be changed afterwards),
+    // we do not provide a name's 'setter' in this class.
 
     public int getPosition() {
         return position;
