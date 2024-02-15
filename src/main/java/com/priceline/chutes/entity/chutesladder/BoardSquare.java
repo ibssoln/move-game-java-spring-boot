@@ -30,7 +30,7 @@ public class BoardSquare {
         this.numberSquaresToSkip = numberSquaresToSkip;
     }
 
-    //NOTE: Does not provide 'setters' to maintain the immutability of the already created instance.
+    //NOTE: Does not provide 'setters' to maintain the immutability of the instance that was already created by the constructor.
 
     public boolean isChute() {
         return isChute;

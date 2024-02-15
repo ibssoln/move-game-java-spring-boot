@@ -30,7 +30,9 @@ public class Board {
 
     //NOTE: changed the modifier scope to 'public'.
     public BoardSquare getSquareAtPosition(int i){
-        return CHUTES_LADDER_SQUARES.get(i-1);
+        //NOTE: added a range protection code where a request for an out-of-range index returns null,
+        // instead of throwing an exception.
+        return (i >= 1 && i <= 100)? CHUTES_LADDER_SQUARES.get(i-1) : null;
     }
 
     //NOTE: getters and setters of class properties can be useful for the extensibility and scalability of the application.

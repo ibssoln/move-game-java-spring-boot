@@ -34,4 +34,5 @@ Author: Chloe Bae
 25. Added a dto and chutesladder package. Created ChutesLadderRequest and ChutesLadderResponse classes to be used by the RESTful service call that runs a chutes and ladders game.
 26. Added a GameType enum to enable the expansion of additional games in the future. Both (1) the Game.java class (gradle run class) and (2) the Restful Spring web service support the extensibility.
 27. Created new packages and classes to be used for another variation of games (e.g., snakeLadder).
-28.
+28. In the getSquareAtPosition method of the Board class, added a range protection code where a request for an out-of-range index returns null, instead of throwing an exception.
+29.

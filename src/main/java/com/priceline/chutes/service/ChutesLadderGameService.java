@@ -106,17 +106,20 @@ public class ChutesLadderGameService implements GameService {
             for (Player currentPlayer : players) {
                 int spinResult = spin();
                 int nextPosition = currentPlayer.getPosition() + spinResult;
-                if (nextPosition > 100){
+                if (nextPosition > 100) {
                     //NOTE: Fixed a bug. The previous statement, 'break;', was inaccurate based on our business rule.
                     // I have changed it to 'continue;' to fix the logical error.
                     continue; //<-- it was 'break' before, which was a defect.
                 }
                 BoardSquare nextSquare = board.getSquareAtPosition(nextPosition);
-                nextPosition += nextSquare.getNumberSquaresToSkip();
-                if (nextPosition < 100) {
-                    currentPlayer.setPosition(nextPosition);
-                } else if (nextPosition == 100) {
-                    return currentPlayer;//The winner!
+                //NOTE: Added a protection code for a null check upon the nextSquare.
+                if(Objects.nonNull(nextSquare)){
+                    nextPosition += nextSquare.getNumberSquaresToSkip();
+                    if (nextPosition < 100) {
+                        currentPlayer.setPosition(nextPosition);
+                    } else if (nextPosition == 100) {
+                        return currentPlayer;//The winner!
+                    }
                 }
             }
         }
