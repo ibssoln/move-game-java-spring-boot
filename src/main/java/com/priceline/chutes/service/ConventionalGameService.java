@@ -1,9 +1,11 @@
-package com.priceline.chutes.conventionalgame;
+package com.priceline.chutes.service;
 
-import com.priceline.chutes.Game;
-import com.priceline.chutes.framework.Controller;
+import com.priceline.chutes.entity.conventionalgame.Board;
+import com.priceline.chutes.entity.conventionalgame.BoardSquare;
+import com.priceline.chutes.entity.conventionalgame.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
@@ -11,15 +13,16 @@ import java.util.stream.Collectors;
 import static com.priceline.chutes.constant.GameConstants.RANDOM;
 import static com.priceline.chutes.util.Utility.*;
 
-public class ConventionalGameController implements Controller {
+@Service
+public class ConventionalGameService implements GameService {
 
     //NOTE: added a SLF4J logger to log info and errors via the logging facility.
-    private static final Logger LOG = LoggerFactory.getLogger(ConventionalGameController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ConventionalGameService.class);
 
     //NOTE: this class stores all game control related functionalities. This class was created to better encapsulate the game execution functions
     // that are only related to the 'chutes-and-ladders' game, in order to achieve a maintainability and extensibility for a later extension of the whole application.
 
-    public ConventionalGameController() {
+    public ConventionalGameService() {
         super();
     }
 

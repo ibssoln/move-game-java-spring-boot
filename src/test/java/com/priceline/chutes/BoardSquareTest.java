@@ -1,6 +1,6 @@
 package com.priceline.chutes;
 
-import com.priceline.chutes.conventionalgame.BoardSquare;
+import com.priceline.chutes.entity.conventionalgame.BoardSquare;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

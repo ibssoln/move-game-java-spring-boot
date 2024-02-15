@@ -4,7 +4,7 @@ Author: Chloe Bae
 1. created a dedicated git repo
 2. created a working git branch (feature/enhancement)
 3. Fixes a bug. Changed the break statement to a continue statement. Committed the change to git.
-4. Created packages to better organize the classes. The package 'conventionalgame' archives all supporting game entity classes, while the main class 'Game' remains at the root directory.
+4. Created packages to better organize the classes. The package 'conventionalgame', under the package named 'entity', archives all supporting game entity classes, while the main class 'Game' remains at the root directory.
 5. In each class, created a base constructor and set/updated the modifier to be 'public' so that an external class can instantiate the target class.
 6. For the Player class, added a 'private' default no-arg constructor, to prevent a Player from being instantiated without a designated player name to meet our requirements. Even if it is locked as 'private' scope, it is always a best practice to explicitly define a "no-arg" constructor especially when there is a separate "arg constructor" defined, because the JVM does not automatically inject(add) a "no-arg" constructor when there is an "arg" constructor defined in the class, which in many cases produces a runtime error.
 6. To achieve a better 'encapsulation' of properties in the classes, explicitly set the class 'properties' to be 'private', and added missing accessors (getters and setters) for those properties so that the properties can be accessed by other object via the accessor methods, rather than accessed directly on the properties themselves. The getters and setters can be also useful for the extensibility and scalability of the application. Often, unit tests can benefit from all types of 'getters and setters' provided for the properties, to test different use-cases extensively. Also, as the application grows, there arises more use-cases where we need to access the properties via accessor methods.
@@ -16,12 +16,12 @@ Author: Chloe Bae
 12. In the Game class, added a new section of code for processing the main method's parameters (args), to accept a variable number (2 ~4) of players with their names. Based on the players information, the players are created.
 13. In the Game class, added new section of code for determining the play order of the players.
 14. From the Game class, changed the Random private class variable as static final resource, and moved the Random static instance to the constant class, since it can be a singleton and be used by many other instances of games.
-15. From the Game class, moved the spin() method to the game controller class, rather than moving it to the Utility class, as the algorithm of this spin method's result is closely pertaining to the 'chutes-and-ladders' game.
+15. From the Game class, moved the spin() method to the game service class, rather than moving it to the Utility class, as the algorithm of this spin method's result is closely pertaining to the 'chutes-and-ladders' game.
 16. In the Game class, added a new createBasePlayers() method.
 17. In the Game class, added a new determinePlayOrder() method, which uses a recursive run of the self method to find the definite order of play among all players. The one or more tied players are given another opportunities to run the spinner, so that they can determine the distinct order. If there is another tie found in this try, the subset of the tied players do another round running the spinner. This process is recursively processed, until there is no tie among the players.
-18. Created a game controller class (Controller.java) to which all the game execution functions are moved from the Game class. This class was created to better encapsulate the game execution functions that are only related to the 'chutes-and-ladders' game, in order to achieve a maintainability and extensibility for a later extension of the whole application.
+18. Created a game service class (ConventionalGameService.java) to which all the game execution functions are moved from the Game class. This class was created to better encapsulate the game execution functions that are only related to the 'chutes-and-ladders' game, in order to achieve a maintainability and extensibility for a later extension of the whole application.
 19. Created a util package and Utility class to store a static non-state functions to be used as helper methods.
-20. For extensibility, created a game controller interface to be implemented by a variation of the concrete game classes.
+20. For extensibility, created an interface for game service (GameService.java) to be implemented by the variation of concrete game service classes.
 21. Integrated Maven Spring Boot framework with the existing gradle based application. Therefore, now you can run the game in ether way - using Spring Boot Restful service, or using the gradle build run.
 	//************************************************
 	//NOTE: You can run a game in 2 different ways.
@@ -29,4 +29,6 @@ Author: Chloe Bae
 	// 2. By running a gradle build (gradle run --args="one two three four") in the command line, where the args (one two three four) are the names of the players.
 	//************************************************
 22. Added a SLF4J logging to the classes, and set the logging levels in the application.properties file.
-23.
+23. Replaced all console print with the SLF4J logging.
+24. Added a package named 'rest' and added a Spring Web REST controller class 'GameRestController' under it. Added code in the GameRestController class, to handle the restful web service calls to play a gama and return the game's results to the requesting application.
+25.
