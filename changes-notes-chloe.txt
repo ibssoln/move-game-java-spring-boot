@@ -30,5 +30,5 @@ Author: Chloe Bae
 	//************************************************
 22. Added a SLF4J logging to the classes, and set the logging levels in the application.properties file.
 23. Replaced all console print with the SLF4J logging.
-24. Added a package named 'rest' and added a Spring Web REST controller class 'GameRestController' under it. Added code in the GameRestController class, to handle the restful web service calls to play a gama and return the game's results to the requesting application.
+24. Added a package named 'rest', under the package named 'web', and added a Spring Web REST controller class 'GameRestController' under it. Added code in the GameRestController class, to handle the restful web service calls to play a gama and return the game's results to the requesting application.
 25.

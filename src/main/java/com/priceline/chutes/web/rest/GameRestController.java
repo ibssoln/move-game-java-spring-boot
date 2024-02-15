@@ -1,4 +1,4 @@
-package com.priceline.chutes.rest;
+package com.priceline.chutes.web.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
