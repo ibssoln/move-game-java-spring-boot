@@ -13,5 +13,7 @@ public class ChutesLadderResponse {
     //NOTE: Added this data transfer object to be used as a Request Response for a chutes and ladder game play.
 
     private String winner;
+    private String error;
+
 
 }

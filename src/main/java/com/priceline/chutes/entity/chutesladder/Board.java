@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.priceline.chutes.constant.GameConstants.SQUARES;
+import static com.priceline.chutes.constant.GameConstants.CHUTES_LADDER_SQUARES;
 
 public class Board {
 
@@ -30,7 +30,7 @@ public class Board {
 
     //NOTE: changed the modifier scope to 'public'.
     public BoardSquare getSquareAtPosition(int i){
-        return SQUARES.get(i-1);
+        return CHUTES_LADDER_SQUARES.get(i-1);
     }
 
     //NOTE: getters and setters of class properties can be useful for the extensibility and scalability of the application.
@@ -40,7 +40,7 @@ public class Board {
     //NOTE: In order to maintain 'immutability', when we send a list to an external entity,
     // we need to wrap the existing list with a new 'ArrayList' once again and send a 'copy' of it, not to send the original list as a reference.
     public List<BoardSquare> getSquares() {
-        return new ArrayList<>(SQUARES); //NOTE: for immutability, we need to return a new copy of the existing list object, not the list itself.
+        return new ArrayList<>(CHUTES_LADDER_SQUARES); //NOTE: for immutability, we need to return a new copy of the existing list object, not the list itself.
     }
 
     //NOTE: We will not have/allow a 'setSquares()' method, because we want to lock the squares once it's made.

@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
+
+import java.util.Objects;
+
 import static com.priceline.chutes.util.Utility.logInfo;
 
 @RestController
@@ -23,8 +27,22 @@ public class GameRestController {
 
     @RequestMapping(value = "/chutesladder", method = RequestMethod.POST, produces = {"application/json"}, consumes = {"application/json"})
     public ResponseEntity<ChutesLadderResponse> playAndGetWinner(@RequestBody ChutesLadderRequest chutesLadderRequest) throws Exception {
-        String winnerName = chutesLadderGameService.initiateGame(chutesLadderRequest.getPlayerNames());
-        logInfo(winnerName);
+        String winnerName = "";
+        try {
+            if (Objects.isNull(chutesLadderRequest.getPlayerNames())) {
+                logInfo("case 1");
+                return new ResponseEntity<>(ChutesLadderResponse.builder().error("Please provide the names of the players").build(), HttpStatus.BAD_REQUEST);
+            } else if (chutesLadderRequest.getPlayerNames().length < 2) {
+                logInfo("case 2");
+                return new ResponseEntity<>(ChutesLadderResponse.builder().error("Please provide at least 2 players names.").build(), HttpStatus.BAD_REQUEST);
+            } else if (chutesLadderRequest.getPlayerNames().length > 4) {
+                logInfo("case 3");
+                return new ResponseEntity<>(ChutesLadderResponse.builder().error("This game supports up to 4 players.").build(), HttpStatus.BAD_REQUEST);
+            }
+            winnerName = chutesLadderGameService.initiateGame(chutesLadderRequest.getPlayerNames());
+        }catch(Exception e){
+            return new ResponseEntity<>(ChutesLadderResponse.builder().error("An unexpected error occurred. Please try again.").build(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return new ResponseEntity<>(ChutesLadderResponse.builder().winner(winnerName).build(), HttpStatus.OK);
     }
 

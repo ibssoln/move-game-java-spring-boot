@@ -47,7 +47,7 @@ public class ChutesLadderGameService implements GameService {
         }catch(Exception e){
             throw new Exception(e);
         }
-        return (Objects.nonNull(winner))? winner.getName() : "UNKNOWN";
+        return (Objects.nonNull(winner))? winner.getName() : "";
     }
 
     //NOTE: the algorithm of this spin method's result is closely pertaining to the 'chutes-and-ladders' game. Therefore, moved it to this game controller class,

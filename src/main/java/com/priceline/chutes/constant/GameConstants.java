@@ -18,10 +18,14 @@ public final class GameConstants {
         super();
     }
 
+    //NOTE: changed the Random private class resource as static, and moved to constant class, since it can be a singleton and be used by many other instances of
+    // different games.
+    public static final Random RANDOM = new Random();
+
     //NOTE: Moved 'specialSquares' in the Board class to the constant class (and set it to be 'public static final'),
     // since this data is fixed and final for the given business rules. Also, refactored the property name to use only
     // the capital letters as it's a constant variable.
-    public static final Map<Integer, BoardSquare> SPECIAL_SQUARES = Map.ofEntries(
+    public static final Map<Integer, BoardSquare> CHUTES_LADDER_SPECIAL_SQUARES = Map.ofEntries(
             entry(1, new BoardSquare(false, true, 37)),
             entry(4, new BoardSquare(false, true, 10)),
             entry(9, new BoardSquare(false, true, 22)),
@@ -46,14 +50,10 @@ public final class GameConstants {
     //NOTE: Moved 'squares' in the Board class to the constant class (and set it to be 'public static final'),
     //  since this data is fixed and final for the given business rules.
     //  Also, refactored the property name to use only the capital letters as it's a constant variable.
-    public static final List<BoardSquare> SQUARES = java.util.stream.IntStream.rangeClosed(1, 100)
+    public static final List<BoardSquare> CHUTES_LADDER_SQUARES = java.util.stream.IntStream.rangeClosed(1, 100)
             .mapToObj(i -> Optional
-            .ofNullable(SPECIAL_SQUARES.get(i))
+            .ofNullable(CHUTES_LADDER_SPECIAL_SQUARES.get(i))
             .orElseGet(BoardSquare::new))
             .collect(Collectors.toList());
-
-    //NOTE: changed the Random private class resource as static, and moved to constant class, since it can be a singleton and be used by many other instances of
-    // different games.
-    public static final Random RANDOM = new Random();
 
 }
