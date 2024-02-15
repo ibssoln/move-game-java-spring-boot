@@ -50,8 +50,13 @@ public class ChutesLadderGameService implements GameService {
         return (Objects.nonNull(winner))? winner.getName() : "";
     }
 
-    //NOTE: the algorithm of this spin method's result is closely pertaining to the 'chutes-and-ladders' game. Therefore, moved it to this game controller class,
+    //NOTE:
+    // the algorithm of this spin method's result is closely pertaining to the 'chutes-and-ladders' game. Therefore, moved it to this game controller class,
     // rather than moving it to the Utility class.
+    //NOTE:
+    // If this game is only used by Spring Boot web service, then we CAN ACTUALLY MOVE this method to a separate service (e.g., SPINROLLSERVICE),
+    // as shown in the class already created. This move has a benefit where we can control the spin result during the unit test, by mocking it.
+    // For now, I will not move this method as such, to support the non-spring-boot application run for this game.
     public int spin(){
         return RANDOM.nextInt(6) + 1;
     }
