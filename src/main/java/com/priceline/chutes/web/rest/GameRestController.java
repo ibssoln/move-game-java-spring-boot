@@ -1,15 +1,15 @@
 package com.priceline.chutes.web.rest;
 
+import com.priceline.chutes.dto.chutesladder.ChutesLadderResponse;
 import com.priceline.chutes.service.ChutesLadderGameService;
+import com.priceline.chutes.dto.chutesladder.ChutesLadderRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import static com.priceline.chutes.util.Utility.logInfo;
 
 @RestController
 @RequestMapping("/game")
@@ -22,9 +22,10 @@ public class GameRestController {
     private ChutesLadderGameService chutesLadderGameService;
 
     @RequestMapping(value = "/chutesladder", method = RequestMethod.POST, produces = {"application/json"}, consumes = {"application/json"})
-    public ResponseEntity<String> playAndGetWinner(@RequestParam String[] playerNames) throws Exception {
-        String winnerName = chutesLadderGameService.initiateGame(playerNames);
-        return new ResponseEntity<>(winnerName, HttpStatus.OK);
+    public ResponseEntity<ChutesLadderResponse> playAndGetWinner(@RequestBody ChutesLadderRequest chutesLadderRequest) throws Exception {
+        String winnerName = chutesLadderGameService.initiateGame(chutesLadderRequest.getPlayerNames());
+        logInfo(winnerName);
+        return new ResponseEntity<>(ChutesLadderResponse.builder().winner(winnerName).build(), HttpStatus.OK);
     }
 
 }
