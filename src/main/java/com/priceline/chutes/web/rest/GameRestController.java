@@ -22,7 +22,7 @@ public class GameRestController {
     private ChutesLadderGameService chutesLadderGameService;
 
     @RequestMapping(value = "/chutesladder", method = RequestMethod.POST, produces = {"application/json"}, consumes = {"application/json"})
-    public ResponseEntity<String> getWinner(@RequestParam String[] playerNames) throws Exception {
+    public ResponseEntity<String> playAndGetWinner(@RequestParam String[] playerNames) throws Exception {
         String winnerName = chutesLadderGameService.initiateGame(playerNames);
         return new ResponseEntity<>(winnerName, HttpStatus.OK);
     }
