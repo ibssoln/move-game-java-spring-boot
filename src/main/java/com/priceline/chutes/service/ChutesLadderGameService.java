@@ -26,13 +26,13 @@ public class ChutesLadderGameService implements GameService {
         super();
     }
 
-    public String initiateGame(String[] gameParams) throws Exception {
+    public String initiateGame(String[] playerNames) throws Exception {
         Player winner = null;
         try {
             //NOTE: Below is a new section of code for processing the main method's parameters (args),
             // to accept a variable number (2 ~4) of players with their names. Based on the players' information, the players instances are created.
             logInfo("1. Let's set the players!");
-            List<Player> players = createBasePlayers(gameParams);
+            List<Player> players = createBasePlayers(playerNames);
 
             if (!CollectionUtils.isEmpty(players)) {
                 //NOTE: Below is a new section of code for determining the play order of the players.
@@ -52,21 +52,21 @@ public class ChutesLadderGameService implements GameService {
 
     //NOTE: the algorithm of this spin method's result is closely pertaining to the 'chutes-and-ladders' game. Therefore, moved it to this game controller class,
     // rather than moving it to the Utility class.
-    private int spin(){
+    public int spin(){
         return RANDOM.nextInt(6) + 1;
     }
 
     //NOTE: This createBasePlayers() method was newly added.
-    public List<Player> createBasePlayers(String[] gameParams){
-        if(gameParams.length<2){
+    public List<Player> createBasePlayers(String[] playerNames){
+        if(playerNames.length<2){
             logInfo("Could not play. Too little number of players. Please enter the names of 2 ~ 4 players.");
             return List.of();
-        }else if(gameParams.length>4){
+        }else if(playerNames.length>4){
             logInfo("Could not play. Too many number of players. Please enter the names of 2 ~ 4 players.");
             return List.of();
         }
-        logInfo("The number players: "+gameParams.length);
-        return Arrays.stream(gameParams).map(p -> new Player(p)).collect(Collectors.toList());
+        logInfo("The number players: "+playerNames.length);
+        return Arrays.stream(playerNames).map(p -> new Player(p)).collect(Collectors.toList());
     }
 
     //NOTE: This determinePlayOrder() method was newly added.
