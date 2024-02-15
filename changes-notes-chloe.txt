@@ -38,4 +38,5 @@ Author: Chloe Bae
 29. Created the unit tests & integration tests for all different layers (controller, services) we have.
 30. TODO: Create a draft class of a dedicated SpinRollService, for a better unit testing for a later extensibility and maintainability. The "reason" why this service is separated is for the versatility of the testing to switch between a fixed result or random results. By separating this service from the actual game service, when testing code, we can easily intervene (= make a pointcut) and mock the result by using a mock object.
 The newly placed chutesAndLaddersSpin() method of the SpinRollService is not yet used. It's because we have to support one service data run at this point, which is triggered by the gradle run for the game. If this game is supported only via spring boot, we can take advantage of this separate service.
+This point has been explained on the top of the unit test class named 'ChutesLadderGameServiceTest'.
 31.
