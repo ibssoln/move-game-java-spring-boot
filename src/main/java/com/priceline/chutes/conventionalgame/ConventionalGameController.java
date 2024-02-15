@@ -4,11 +4,12 @@ import com.priceline.chutes.Game;
 import com.priceline.chutes.framework.Controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import static com.priceline.chutes.constant.GameConstants.RANDOM;
-import static com.priceline.chutes.util.Utility.print;
+import static com.priceline.chutes.util.Utility.*;
 
 public class ConventionalGameController implements Controller {
 
@@ -25,17 +26,20 @@ public class ConventionalGameController implements Controller {
     public void initiateGame(String[] gameParams){
         //NOTE: Below is a new section of code for processing the main method's parameters (args),
         // to accept a variable number (2 ~4) of players with their names. Based on the players' information, the players instances are created.
-        print("--- Let's set the players!");
+        logInfo("1. Let's set the players!");
         List<Player> players = createBasePlayers(gameParams);
 
-        //NOTE: Below is a new section of code for determining the play order of the players.
-        print("--- Let's determine the play order!");
-        players = determinePlayOrder(players);
-        print("The play order : "+ players.stream().map(player -> player.getName()).collect(Collectors.joining(", ")).toString());
+        if(!CollectionUtils.isEmpty(players)){
+            //NOTE: Below is a new section of code for determining the play order of the players.
+            logInfo("2. Let's determine the play order!");
+            players = determinePlayOrder(players);
+            logInfo("The play order : "+ players.stream().map(player -> player.getName()).collect(Collectors.joining(", ")).toString());
 
-        print("--- Let's play the game!");
-        Player winner = playGame(players);
-        System.out.println("The winner is: " + winner.getName());
+            logInfo("3. Let's play the game!");
+            Player winner = playGame(players);
+            logInfo("The winner is: " + winner.getName());
+        }
+
     }
 
     //NOTE: the algorithm of this spin method's result is closely pertaining to the 'chutes-and-ladders' game. Therefore, moved it to this game controller class,
@@ -47,13 +51,13 @@ public class ConventionalGameController implements Controller {
     //NOTE: This createBasePlayers() method was newly added.
     public List<Player> createBasePlayers(String[] gameParams){
         if(gameParams.length<2){
-            print("Could not play. Too little number of players. Please enter the names of 2 ~ 4 players.");
-            System.exit(0);
+            logInfo("Could not play. Too little number of players. Please enter the names of 2 ~ 4 players.");
+            return List.of();
         }else if(gameParams.length>4){
-            print("Could not play. Too many number of players. Please enter the names of 2 ~ 4 players.");
-            System.exit(0);
+            logInfo("Could not play. Too many number of players. Please enter the names of 2 ~ 4 players.");
+            return List.of();
         }
-        print("The number players: "+gameParams.length);
+        logInfo("The number players: "+gameParams.length);
         return Arrays.stream(gameParams).map(p -> new Player(p)).collect(Collectors.toList());
     }
 
@@ -64,7 +68,7 @@ public class ConventionalGameController implements Controller {
         //1. each player spins and get their individual number.
         players.stream().forEach(player -> {
             int spinVal = spin();
-            print("> player name: "+player.getName()+", spin result: "+spinVal);
+            logInfo("> player name: "+player.getName()+", spin result: "+spinVal);
             if(Objects.nonNull(spinResults.get(spinVal))){
                 spinResults.get(spinVal).add(player);
             }else{
