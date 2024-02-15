@@ -30,24 +30,14 @@ public class BoardSquare {
         this.numberSquaresToSkip = numberSquaresToSkip;
     }
 
-    //NOTE: the following getters and setters can be also useful for the extensibility and scalability of the application.
-    // Often, unit tests can benefit from the 'getters and setters' provided for the properties, to test different use-cases extensively.
-    // Also, as the application grows, there arises more use-cases where we need to access the properties via accessor methods.
+    //NOTE: Does not provide 'setters' to maintain the immutability of the already created instance.
 
     public boolean isChute() {
         return isChute;
     }
 
-    public void setChute(boolean chute) {
-        isChute = chute;
-    }
-
     public boolean isLadder() {
         return isLadder;
-    }
-
-    public void setLadder(boolean ladder) {
-        isLadder = ladder;
     }
 
     public int getNumberSquaresToSkip() {
@@ -58,10 +48,6 @@ public class BoardSquare {
         } else {
             return 0;
         }
-    }
-
-    public void setNumberSquaresToSkip(int numberSquaresToSkip) {
-        this.numberSquaresToSkip = numberSquaresToSkip;
     }
 
 }
