@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import static com.priceline.chutes.constant.GameConstants.RANDOM;
@@ -119,10 +118,12 @@ public class ChutesLadderGameService implements GameService {
                 BoardSquare nextSquare = board.getSquareAtPosition(nextPosition);
                 //NOTE: Added a protection code for a null check upon the nextSquare.
                 if(Objects.nonNull(nextSquare)){
-                    nextPosition += nextSquare.getNumberSquaresToSkip();
-                    if (nextPosition < 100) {
-                        currentPlayer.setPosition(nextPosition);
-                    } else if (nextPosition == 100) {
+                    //NOTE: The "+=" operator used with the primitive int type nextPosition variable caused a calculation error.
+                    // Changed it to be assigned to a new int rather than reusing the primitive nextPosition int variable.
+                    int finalPos = nextPosition + nextSquare.getNumberSquaresToSkip();
+                    if (finalPos < 100) {
+                        currentPlayer.setPosition(finalPos);
+                    } else if (finalPos == 100) {
                         return currentPlayer;//The winner!
                     }
                 }

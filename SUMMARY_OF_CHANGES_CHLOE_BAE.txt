@@ -1,8 +1,32 @@
 ** Notes for the made enhancements **
 Author: Chloe Bae
 
-1. created a dedicated git repo
-2. created a working git branch (feature/enhancement)
+========================================================== SUMMARY ====================================================
+** What was done (SUMMARY) **
+
+1. A list of changes that I made (e.g., NOTEs) and a list of potential changes (e.g., TODOs) are written both in this txt file and in the java class code.
+2. The application can be run in both ways, 
+(1) using a command line gradle run (e.g., gradle build (gradle run --args="CHUTES_AND_LADDER Jane Mike Doug Chloe")) and 
+(2) via the spring boot web RESTful service (e.g., POST http://localhost:8080/game/chutesladder, with JSON payload {	"playerNames": [ "Jane", "Mike", "Doug", "Chloe" ]} ). 
+3. Following the instruction, only 2~4 player names are to be entered. If less or more, an adequate error message is shown.
+4. I have made many extensions:
+(1) Accept a variable number of players with varying player names.
+(2) Before starting the game, each player runs the spinner and compares their results to determine the order of play among them. If some people get the same number on the spinner, they run the spinner again and decide their order of play. This algorithm is performed using a recursive function. As instructed, the largest numbered player goes before the less numbered player.
+(3) I have fixed a couple of wrong syntaxes in the existing code and restructured the entire code to be a more enterprise friendly (extensible & maintainable) solution.
+(4) I have made it to be extensible in the future, for adding additional games in the framework. The enum and package structure is already supporting it.
+(5) I have added functional and integration unit testing for all layers. The code uses many different technologies - native Jnit, Spring Boot integration, Mockito, and Easymock.
+(6) I probably have done more than what I explained (e.g., logging, properties, constants, utility). You will be able to find more, by directly reading the code.  
+
+========================================================== DETAILS ====================================================
+** A detailed log of changes **
+
+1. Integrated Maven Spring Boot framework with the existing gradle based application. Therefore, now you can run the game in ether way - using Spring Boot Restful service, or using the gradle build run.
+	//************************************************
+	//NOTE: You can run a game in 2 different ways.
+	// 1. By sending a request to the RESTful service endpoint after the Spring Boot server is up and running.
+	// 2. By running a gradle build (gradle run --args="CHUTES_AND_LADDER Jane Mike Doug Chloe") in the command line, where the args (Jane Mike Doug Chloe) are the names of the players.
+	//************************************************
+2.created a dedicated git repo. Also, created a working git branch (feature/enhancement).
 3. Fixes a bug. Changed the break statement to a continue statement. Committed the change to git.
 4. Created packages to better organize the classes. The package 'chutesladder', under the package named 'entity', archives all supporting game entity classes, while the main class 'Game' remains at the root directory.
 5. In each class, created a base constructor and set/updated the modifier to be 'public' so that an external class can instantiate the target class.
@@ -22,21 +46,17 @@ Author: Chloe Bae
 18. Created a game service class (ChutesLadderGameService.java) to which all the game execution functions are moved from the Game class. This class was created to better encapsulate the game execution functions that are only related to the 'chutes-and-ladders' game, in order to achieve a maintainability and extensibility for a later extension of the whole application.
 19. Created a util package and Utility class to store a static non-state functions to be used as helper methods.
 20. For extensibility, created an interface for game service (GameService.java) to be implemented by the variation of concrete game service classes.
-21. Integrated Maven Spring Boot framework with the existing gradle based application. Therefore, now you can run the game in ether way - using Spring Boot Restful service, or using the gradle build run.
-	//************************************************
-	//NOTE: You can run a game in 2 different ways.
-	// 1. By sending a request to the RESTful service endpoint after the Spring Boot server is up and running.
-	// 2. By running a gradle build (gradle run --args="one two three four") in the command line, where the args (one two three four) are the names of the players.
-	//************************************************
-22. Added a SLF4J logging to the classes, and set the logging levels in the application.properties file.
-23. Replaced all console print with the SLF4J logging.
-24. Added a package named 'rest', under the package named 'web', and added a Spring Web REST controller class 'GameRestController' under it. Added code in the GameRestController class, to handle the restful web service calls to play a gama and return the game's results to the requesting application.
-25. Added a dto and chutesladder package. Created ChutesLadderRequest and ChutesLadderResponse classes to be used by the RESTful service call that runs a chutes and ladders game.
-26. Added a GameType enum to enable the expansion of additional games in the future. Both (1) the Game.java class (gradle run class) and (2) the Restful Spring web service support the extensibility.
-27. Created new packages and classes to be used for another variation of games (e.g., snakeLadder).
-28. In the getSquareAtPosition method of the Board class, added a range protection code where a request for an out-of-range index returns null, instead of throwing an exception.
-29. Created the unit tests & integration tests for all different layers (controller, services) we have.
-30. TODO: Create a draft class of a dedicated SpinRollService, for a better unit testing for a later extensibility and maintainability. The "reason" why this service is separated is for the versatility of the testing to switch between a fixed result or random results. By separating this service from the actual game service, when testing code, we can easily intervene (= make a pointcut) and mock the result by using a mock object.
+21. Added a SLF4J logging to the classes, and set the logging levels in the application.properties file.
+22. Replaced all console print with the SLF4J logging.
+23. Added a package named 'rest', under the package named 'web', and added a Spring Web REST controller class 'GameRestController' under it. Added code in the GameRestController class, to handle the restful web service calls to play a gama and return the game's results to the requesting application.
+24. Added a dto and chutesladder package. Created ChutesLadderRequest and ChutesLadderResponse classes to be used by the RESTful service call that runs a chutes and ladders game.
+25. Added a GameType enum to enable the expansion of additional games in the future. Both (1) the Game.java class (gradle run class) and (2) the Restful Spring web service support the extensibility.
+26. Created new packages and classes to be used for another variation of games (e.g., snakeLadder).
+27. In the getSquareAtPosition method of the Board class, added a range protection code where a request for an out-of-range index returns null, instead of throwing an exception.
+28. Created the unit tests & integration tests for all different layers (controller, services) we have.
+29. TODO: Create a draft class of a dedicated SpinRollService, for a better unit testing for a later extensibility and maintainability. The "reason" why this service is separated is for the versatility of the testing to switch between a fixed result or random results. By separating this service from the actual game service, when testing code, we can easily intervene (= make a pointcut) and mock the result by using a mock object.
 The newly placed chutesAndLaddersSpin() method of the SpinRollService is not yet used. It's because we have to support one service data run at this point, which is triggered by the gradle run for the game. If this game is supported only via spring boot, we can take advantage of this separate service.
 This point has been explained on the top of the unit test class named 'ChutesLadderGameServiceTest'.
-31.
+30. In the 'playGame' method in the ChutesLadderGameService class, the "+=" operator used with the primitive int type nextPosition variable caused a calculation error. Changed it to be assigned to a new int rather than reusing the primitive nextPosition int variable. 
+As of this, all the assignment goal has been met. For the additional items, I will bring this to the next interviews. Thanks.
+============================================================================================================================================================
